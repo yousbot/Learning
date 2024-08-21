@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Python Tutorial Reference</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        code { background-color: #f4f4f4; padding: 2px 5px; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+        section { margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+    <h1>DSA Python Tutorial Reference</h1>
+
+    <!-- Arrays/Lists -->
+    <section>
+        <h2>Arrays/Lists</h2>
+        <h3>Create</h3>
+        <pre><code>arr = [1, 2, 3, 4]</code></pre>
+
+        <h3>Insert/Add</h3>
+        <pre><code>def append(arr, value):
+    arr += [value]
+
+def insert(arr, index, value):
+    arr[index+1:] = arr[index:]
+    arr[index] = value</code></pre>
+
+        <h3>Delete/Remove</h3>
+        <pre><code>def remove_by_index(arr, index):
+    arr[:] = arr[:index] + arr[index+1:]
+
+def remove_by_value(arr, value):
+    for i in range(len(arr)):
+        if arr[i] == value:
+            remove_by_index(arr, i)
+            break</code></pre>
+
+        <h3>Search</h3>
+        <pre><code>def linear_search(arr, value):
+    for i in range(len(arr)):
+        if arr[i] == value:
+            return i
+    return -1
+
+def binary_search(arr, value):
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == value:
+            return mid
+        elif arr[mid] < value:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1</code></pre>
+
+        <h3>Update</h3>
+        <pre><code>def update(arr, index, value):
+    if 0 <= index < len(arr):
+        arr[index] = value</code></pre>
+
+        <h3>Sort</h3>
+        <pre><code>def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr)//2
+        L = arr[:mid]
+        R = arr[mid:]
+
+        merge_sort(L)
+        merge_sort(R)
+
+        i = j = k = 0
+
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1</code></pre>
+
+        <h3>Access</h3>
+        <pre><code>def access(arr, index):
+    if 0 <= index < len(arr):
+        return arr[index]
+    return None</code></pre>
+    </section>
+
+    <!-- Linked List -->
+    <section>
+        <h2>Linked List</h2>
+        <h3>Create</h3>
+        <pre><code>class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None</code></pre>
+
+        <h3>Insert/Add</h3>
+        <pre><code>def append(self, data):
+    new_node = Node(data)
+    if not self.head:
+        self.head = new_node
+        return
+    last = self.head
+    while last.next:
+        last = last.next
+    last.next = new_node
+
+def prepend(self, data):
+    new_node = Node(data)
+    new_node.next = self.head
+    self.head = new_node</code></pre>
+
+        <h3>Delete/Remove</h3>
+        <pre><code>def delete_node(self, key):
+    temp = self.head
+    if temp and temp.data == key:
+        self.head = temp.next
+        temp = None
+        return
+    prev = None
+    while temp and temp.data != key:
+        prev = temp
+        temp = temp.next
+    if temp is None:
+        return
+    prev.next = temp.next
+    temp = None</code></pre>
+
+        <h3>Search</h3>
+        <pre><code>def search(self, key):
+    current = self.head
+    while current:
+        if current.data == key:
+            return True
+        current = current.next
+    return False</code></pre>
+
+        <h3>Update</h3>
+        <pre><code>def update_node(self, old_data, new_data):
+    current = self.head
+    while current:
+        if current.data == old_data:
+            current.data = new_data
+            return
+        current = current.next</code></pre>
+
+        <h3>Access</h3>
+        <pre><code>def get_node(self, index):
+    current = self.head
+    count = 0
+    while current:
+        if count == index:
+            return current.data
+        count += 1
+        current = current.next
+    return None</code></pre>
+    </section>
+
+    <!-- Stack -->
+    <section>
+        <h2>Stack</h2>
+        <h3>Create</h3>
+        <pre><code>class Stack:
+    def __init__(self):
+        self.stack = []</code></pre>
+
+        <h3>Push</h3>
+        <pre><code>def push(self, data):
+    self.stack.append(data)</code></pre>
+
+        <h3>Pop</h3>
+        <pre><code>def pop(self):
+    if not self.is_empty():
+        return self.stack.pop()
+    return None</code></pre>
+
+        <h3>Peek/Top</h3>
+        <pre><code>def peek(self):
+    if not self.is_empty():
+        return self.stack[-1]
+    return None</code></pre>
+
+        <h3>Check if Empty</h3>
+        <pre><code>def is_empty(self):
+    return len(self.stack) == 0</code></pre>
+    </section>
+
+    <!-- Queue -->
+    <section>
+        <h2>Queue</h2>
+        <h3>Create</h3>
+        <pre><code>class Queue:
+    def __init__(self):
+        self.queue = []</code></pre>
+
+        <h3>Enqueue</h3>
+        <pre><code>def enqueue(self, data):
+    self.queue.append(data)</code></pre>
+
+        <h3>Dequeue</h3>
+        <pre><code>def dequeue(self):
+    if not self.is_empty():
+        return self.queue.pop(0)
+    return None</code></pre>
+
+        <h3>Peek/Front</h3>
+        <pre><code>def front(self):
+    if not self.is_empty():
+        return self.queue[0]
+    return None</code></pre>
+
+        <h3>Peek/Back</h3>
+        <pre><code>def back(self):
+    if not self.is_empty():
+        return self.queue[-1]
+    return None</code></pre>
+
+        <h3>Check if Empty</h3>
+        <pre><code>def is_empty(self):
+    return len(self.queue) == 0</code></pre>
+    </section>
+
+    <!-- Set -->
+    <section>
+        <h2>Set</h2>
+        <h3>Create</h3>
+        <pre><code>class MySet:
+    def __init__(self):
+        self.items = []</code></pre>
+
+        <h3>Add</h3>
+        <pre><code>def add(self, value):
+    if value not in self.items:
+        self.items.append(value)</code></pre>
+
+        <h3>Remove</h3>
+        <pre><code>def remove(self, value):
+    if value in self.items:
+        self.items.remove(value)</code></pre>
+
+        <h3>Search (Contains)</h3>
+        <pre><code>def contains(self, value):
+    return value in self.items</code></pre>
+
+        <h3>Access (All Elements)</h3>
+        <pre><code>def get_elements(self):
+    return self.items</code></pre>
+    </section>
+
+    <!-- Map (Dictionary) -->
+    <section>
+        <h2>Map (Dictionary)</h2>
+        <h3>Create</h3>
+        <pre><code>class MyMap:
+    def __init__(self):
+        self.keys = []
+        self.values = []</code></pre>
+
+        <h3>Put/Set</h3>
+        <pre><code>def put(self, key, value):
+    if key in self.keys:
+        index = self.keys.index(key)
+        self.values[index] = value
+    else:
+        self.keys.append(key)
+        self.values.append(value)</code></pre>
+
+        <h3>Get/Contains</h3>
+        <pre><code>def get(self, key):
+    if key in self.keys:
+        index = self.keys.index(key)
+        return self.values[index]
+    return None
+
+def contains(self, key):
+    return key in self.keys</code></pre>
+
+        <h3>Remove</h3>
+        <pre><code>def remove(self, key):
+    if key in self.keys:
+        index = self.keys.index(key)
+        self.keys.pop(index)
+        self.values.pop(index)</code></pre>
+
+        <h3>Access (All Pairs)</h3>
+        <pre><code>def get_items(self):
+    return list(zip(self.keys, self.values))</code></pre>
+    </section>
+
+    <!-- Tree -->
+    <section>
+        <h2>Tree (Binary Tree Example)</h2>
+        <h3>Create</h3>
+        <pre><code>class TreeNode:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.value = key</code></pre>
+
+        <h3>Insert Node</h3>
+        <pre><code>def insert(root, key):
+    if root is None:
+        return TreeNode(key)
+    else:
+        if root.value < key:
+            root.right = insert(root.right, key)
+        else:
+            root.left = insert(root.left, key)
+    return root</code></pre>
+
+        <h3>Delete Node</h3>
+        <pre><code>def delete_node(root, key):
+    if root is None:
+        return root
+    if key < root.value:
+        root.left = delete_node(root.left, key)
+    elif key > root.value:
+        root.right = delete_node(root.right, key)
+    else:
+        if root.left is None:
+            return root.right
+        elif root.right is None:
+            return root.left
+        temp = min_value_node(root.right)
+        root.value = temp.value
+        root.right = delete_node(root.right, temp.value)
+    return root
+
+def min_value_node(node):
+    current = node
+    while current.left is not None:
+        current = current.left
+    return current</code></pre>
+
+        <h3>Search (Binary Search)</h3>
+        <pre><code>def search(root, key):
+    if root is None or root.value == key:
+        return root
+    if root.value < key:
+        return search(root.right, key)
+    return search(root.left, key)</code></pre>
+
+        <h3>Update Node</h3>
+        <pre><code>def update_node(root, old_key, new_key):
+    root = delete_node(root, old_key)
+    return insert(root, new_key)</code></pre>
+
+        <h3>Traversal (In-Order)</h3>
+        <pre><code>def inorder_traversal(root):
+    res = []
+    if root:
+        res = inorder_traversal(root.left)
+        res.append(root.value)
+        res = res + inorder_traversal(root.right)
+    return res</code></pre>
+
+        <h3>Access (By Traversal)</h3>
+        <pre><code>def access_via_traversal(root):
+    return inorder_traversal(root)</code></pre>
+    </section>
+
+    <!-- Graph -->
+    <section>
+        <h2>Graph</h2>
+        <h3>Create</h3>
+        <pre><code>class Graph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_edge(self, u, v):
+        if u not in self.graph:
+            self.graph[u] = []
+        self.graph[u].append(v)
+
+    def add_node(self, u):
+        if u not in self.graph:
+            self.graph[u] = []</code></pre>
+
+        <h3>BFS</h3>
+        <pre><code>def bfs(self, start):
+    visited = set()
+    queue = [start]
+    while queue:
+        vertex = queue.pop(0)
+        if vertex not in visited:
+            print(vertex, end=" ")
+            visited.add(vertex)
+            queue.extend([v for v in self.graph[vertex] if v not in visited])</code></pre>
+
+        <h3>DFS</h3>
+        <pre><code>def dfs(self, vertex, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(vertex)
+    print(vertex, end=" ")
+    for neighbor in self.graph[vertex]:
+        if neighbor not in visited:
+            self.dfs(neighbor, visited)</code></pre>
+
+        <h3>Remove Edge</h3>
+        <pre><code>def remove_edge(self, u, v):
+    if u in self.graph:
+        self.graph[u].remove(v)</code></pre>
+
+        <h3>Remove Node</h3>
+        <pre><code>def remove_node(self, u):
+    if u in self.graph:
+        del self.graph[u]
+    for k, v in self.graph.items():
+        if u in v:
+            v.remove(u)</code></pre>
+
+        <h3>Traversal (DFS/BFS)</h3>
+        <pre><code>def traverse_graph(self, start, method="DFS"):
+    if method == "DFS":
+        self.dfs(start)
+    elif method == "BFS":
+        self.bfs(start)</code></pre>
+
+        <h3>Access (By Traversal)</h3>
+        <pre><code>def access_by_traversal(self, start, method="DFS"):
+    return self.traverse_graph(start, method)</code></pre>
+    </section>
+
+</body>
+</html>
+
